@@ -68,19 +68,20 @@ plt.legend(loc="lower right")
 plt.grid()
 plt.show()
 
-# Predict new data in that model
-new_data = pd.read_csv(r'C:\Users\LENOVO\OneDrive\Desktop\final1.csv')
-new_data = new_data.drop('Gender',axis=1)
-new_data = new_data[['Age','EstimatedSalary']]
-new_prediction = classifier.predict(new_data.values)
-print('The Future Predict Result',new_prediction)
+dataset1 = pd.read_csv(r"C:\Users\LENOVO\OneDrive\Desktop\final1.csv")
+d2 = dataset1.copy()
+dataset1=dataset1.iloc[:,[3,4]].values
 
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+M = sc.fit_transform(dataset1)
 
-for index, pred in enumerate(new_prediction):
-    if pred == 1:
-        print(f"Customer {index + 1}: They attempt to buy this product")
-    else:
-        print(f"Customer {index + 1}: They might not purchase  the product")
+y_pred1 = pd.DataFrame()
+
+d2 ['Y_pred1'] = classifier.predict(M)
+
+d2.to_csv('final.csv')
+
 
 
 
